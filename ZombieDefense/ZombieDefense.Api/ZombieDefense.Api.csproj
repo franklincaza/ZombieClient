@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZombieDefense.Application\ZombieDefense.Application.csproj" />
+    <ProjectReference Include="..\ZombieDefense.Infrastructure\ZombieDefense.Infrastructure.csproj" />
+    <ProjectReference Include="..\ZombieDefense.Persistence\ZombieDefense.Persistence.csproj" />
+    <ProjectReference Include="..\ZombieDefense.Domain\ZombieDefense.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
