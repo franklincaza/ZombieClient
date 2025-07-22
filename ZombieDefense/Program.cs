@@ -7,6 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenLocalhost(5154);
+});
+
 builder.Services.AddDbContext<ZombieDb>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
 
@@ -55,14 +60,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZombieDefense API V1");
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ZombieDefense API V1");
+});
 
 app.UseWhen(context => !context.Request.Path.StartsWithSegments("/swagger") && !context.Request.Path.Equals("/"), appBuilder =>
 {
